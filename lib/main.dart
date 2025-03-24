@@ -81,11 +81,6 @@ class WelcomeScreen extends StatelessWidget {
                 // Navigation Button
                 ElevatedButton(
                   onPressed: () {
-                    // Navigate to the next screen
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(builder: (context) => NextScreen()),
-                    // );
                     Navigator.pushNamed(context, '/selection');
                   },
                   style: ElevatedButton.styleFrom(
