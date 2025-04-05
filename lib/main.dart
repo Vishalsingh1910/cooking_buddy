@@ -215,7 +215,6 @@ class ItemSelectionScreen extends StatelessWidget {
   }
 }
 
-// Enhanced Result Screen
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
 
