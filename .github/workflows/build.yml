@@ -1,7 +1,55 @@
+# name: Build APK
+
+# on:
+#   workflow_dispatch:  # So we can trigger it via API
+
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3
+
+#       - name: Setup Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: '3.27.0'  # Use your version
+
+#       - name: Install dependencies
+#         run: flutter pub get
+
+#       - name: Build APK
+#         run: flutter build apk --release
+
+#       - name: Upload APK artifact
+#         uses: actions/upload-artifact@v4
+#         with:
+#           name: app-release
+#           path: build/app/outputs/flutter-apk/app-release.apk
+
+#       - name: Send email with APK link
+#         uses: dawidd6/action-send-mail@v3
+#         with:
+#           server_address: smtp.gmail.com
+#           server_port: 465
+#           username: ${{ secrets.EMAIL_USERNAME }}
+#           password: ${{ secrets.EMAIL_PASSWORD }}
+#           subject: 📦 New Cooking Buddy APK Build Available
+#           to: vishal444m@gmail.com
+#           from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
+#           body: |
+#             ✅ A new Cooking Buddy APK has been built successfully!
+
+#             👉 Download it from GitHub Artifacts:
+#             https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+
+#             🕓 Build Time: ${{ github.event.head_commit.timestamp }}
+
 name: Build APK
 
 on:
-  workflow_dispatch:  # So we can trigger it via API
+  workflow_dispatch:  # Allows manual trigger from GitHub UI or API
 
 jobs:
   build:
@@ -14,7 +62,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.27.0'  # Use your version
+          flutter-version: '3.27.0'  # Set your desired Flutter version
 
       - name: Install dependencies
         run: flutter pub get
@@ -27,6 +75,18 @@ jobs:
         with:
           name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      - name: Install Rclone
+        run: |
+          curl https://rclone.org/install.sh | sudo bash
+
+      - name: Decode and save rclone.conf
+        run: |
+          echo "${{ secrets.RCLONE_CONF_BASE64 }}" | base64 --decode > rclone.conf
+
+      - name: Upload APK to Google Drive
+        run: |
+          rclone copy build/app/outputs/flutter-apk/app-release.apk drive:CookingBuddy --config=rclone.conf
 
       - name: Send email with APK link
         uses: dawidd6/action-send-mail@v3
