@@ -84,9 +84,15 @@ jobs:
         run: |
           echo "${{ secrets.RCLONE_CONF_BASE64 }}" | base64 --decode > rclone.conf
 
-      - name: Upload APK to Google Drive
+            - name: Upload APK to Google Drive
         run: |
           rclone copy build/app/outputs/flutter-apk/app-release.apk drive:CookingBuddy --config=rclone.conf
+
+      - name: Get Shareable Google Drive Link
+        id: drive_link
+        run: |
+          LINK=$(rclone link drive:CookingBuddy/app-release.apk --config=rclone.conf)
+          echo "download_url=$LINK" >> $GITHUB_OUTPUT
 
       - name: Send email with APK link
         uses: dawidd6/action-send-mail@v3
@@ -99,9 +105,9 @@ jobs:
           to: vishal444m@gmail.com
           from: GitHub Actions <${{ secrets.EMAIL_USERNAME }}>
           body: |
-            ✅ A new Cooking Buddy APK has been built successfully!
+            ✅ A new Cooking Buddy APK has been built and uploaded to Google Drive!
 
-            👉 Download it from GitHub Artifacts:
-            https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            👉 Download it here:
+            ${{ steps.drive_link.outputs.download_url }}
 
             🕓 Build Time: ${{ github.event.head_commit.timestamp }}
