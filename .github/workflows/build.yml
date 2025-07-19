@@ -26,9 +26,9 @@ jobs:
         run: |
           curl https://rclone.org/install.sh | sudo bash
 
-      - name: Setup rclone config
+      - name: Decode and save rclone.conf
         run: |
-          echo "${{ secrets.RCLONE_CONF }}" > rclone.conf
+          echo "${{ secrets.RCLONE_CONF_BASE64  }}" > rclone.conf
 
       - name: Upload APK to Google Drive
         run: |
