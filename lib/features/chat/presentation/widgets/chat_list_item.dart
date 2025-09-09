@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../pages/chat_detail_page.dart';
 
 class ChatListItem extends StatelessWidget {
   final String profileImage;
@@ -26,7 +27,13 @@ class ChatListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigate to chat detail
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => ChatDetailPage(
+              recipientName: name,
+            ),
+          ),
+        );
       },
       child: Container(
         padding: const EdgeInsets.all(AppConstants.paddingMedium),
