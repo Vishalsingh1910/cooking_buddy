@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../home/presentation/pages/home_page.dart';
-import '../../../recipes/presentation/pages/my_recipes_page.dart';
+import '../../../recipes/presentation/pages/recipe_list_page.dart';
 import '../../../chat/presentation/pages/chat_page.dart';
 import '../../../profile/presentation/pages/profile_page.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -17,7 +17,7 @@ class MainNavigation extends ConsumerWidget {
 
     final pages = [
       const HomePage(),
-      const MyRecipesPage(),
+      const RecipeListPage(),
       const ChatPage(),
       const ProfilePage(),
     ];
@@ -43,9 +43,9 @@ class MainNavigation extends ConsumerWidget {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.bookmark_outline),
-            activeIcon: Icon(Icons.bookmark),
-            label: 'My Recipes',
+            icon: Icon(Icons.restaurant_menu_outlined),
+            activeIcon: Icon(Icons.restaurant_menu),
+            label: 'Recipes',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat_bubble_outline),
