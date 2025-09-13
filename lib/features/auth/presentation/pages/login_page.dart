@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -21,6 +22,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
   bool _isLoading = false;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -34,13 +36,50 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         _isLoading = true;
       });
 
-      // Simulate login process
-      await Future.delayed(const Duration(seconds: 2));
-
-      if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const MainNavigation()),
+      try {
+        final userCredential = await _auth.signInWithEmailAndPassword(
+          email: _emailController.text.trim(),
+          password: _passwordController.text.trim(),
         );
+
+        if (userCredential.user != null) {
+          // Successful login
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => const MainNavigation()),
+          );
+        }
+      } on FirebaseAuthException catch (e) {
+        // Firebase-specific errors
+        String message;
+        switch (e.code) {
+          case "user-not-found":
+            message = "No user found with this email.";
+            break;
+          case "wrong-password":
+            message = "Incorrect password.";
+            break;
+          case "invalid-email":
+            message = "Invalid email address.";
+            break;
+          default:
+            message = "Login failed. Please try again.";
+        }
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(message)),
+        );
+      } catch (e) {
+        debugPrint("Error: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Something went wrong. Try again.")),
+        );
+      } finally {
+        // Always stop loading
+        if (mounted) {
+          setState(() {
+            _isLoading = false;
+          });
+        }
       }
     }
   }

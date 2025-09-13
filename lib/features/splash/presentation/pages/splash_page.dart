@@ -1,3 +1,5 @@
+import 'package:cooking_buddy/features/navigation/presentation/pages/main_navigation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
@@ -52,9 +54,18 @@ class _SplashPageState extends ConsumerState<SplashPage>
     await _animationController.forward();
     await Future.delayed(const Duration(milliseconds: 500));
 
-    if (mounted) {
-      // For demo purposes, always show onboarding
-      // In a real app, you'd check SharedPreferences or similar
+    if (!mounted) return;
+
+    // Check if user is logged in
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // User is logged in → go to main navigation
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const MainNavigation()),
+      );
+    } else {
+      // User is logged out → go to onboarding
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => const OnboardingPage()),
       );
@@ -88,7 +99,7 @@ class _SplashPageState extends ConsumerState<SplashPage>
                         borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.primary.withValues(alpha: 0.3),
+                            color: AppColors.primary.withAlpha(77), // 0.3 alpha
                             blurRadius: 20,
                             offset: const Offset(0, 8),
                           ),
