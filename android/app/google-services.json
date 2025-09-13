@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "521616230171",
+    "project_id": "cooking-buddy-e044b",
+    "storage_bucket": "cooking-buddy-e044b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:521616230171:android:8733280693d3a6fbbab5be",
+        "android_client_info": {
+          "package_name": "com.startup.cooking_buddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnbdnQSjlZUBmMgYyys_upodfGQu8mAsM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

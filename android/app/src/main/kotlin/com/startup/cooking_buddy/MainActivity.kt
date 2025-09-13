@@ -1,4 +1,4 @@
-package com.example.cooking_buddy
+package com.startup.cooking_buddy
 
 import io.flutter.embedding.android.FlutterActivity
 
