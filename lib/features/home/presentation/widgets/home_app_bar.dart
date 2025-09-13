@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../../core/theme/app_colors.dart';
 
@@ -12,6 +13,13 @@ class HomeAppBar extends StatelessWidget {
       snap: true,
       backgroundColor: Colors.transparent,
       elevation: 0,
+      systemOverlayStyle: const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        systemNavigationBarColor: AppColors.cardBackground,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
       flexibleSpace: Container(
         decoration: BoxDecoration(
           color: Colors.white.withValues(alpha: 0.95),

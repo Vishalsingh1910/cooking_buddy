@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/status_bar_utils.dart';
 import '../widgets/onboarding_screen.dart';
 import '../../../auth/presentation/pages/login_page.dart';
 
@@ -55,6 +56,9 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Set light status bar for onboarding
+    StatusBarUtils.setLightStatusBar();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(

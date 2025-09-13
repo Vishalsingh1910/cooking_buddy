@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/status_bar_utils.dart';
 import '../widgets/auth_card.dart';
 import 'login_page.dart';
 
@@ -31,6 +32,9 @@ class ResetPasswordSuccessPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Set light status bar for auth pages
+    StatusBarUtils.setLightStatusBar();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(

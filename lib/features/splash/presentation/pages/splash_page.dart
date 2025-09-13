@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/status_bar_utils.dart';
 import '../../../onboarding/presentation/pages/onboarding_page.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -19,6 +20,10 @@ class _SplashPageState extends ConsumerState<SplashPage>
   @override
   void initState() {
     super.initState();
+
+    // Set light status bar for splash (light background)
+    StatusBarUtils.setLightStatusBar();
+
     _animationController = AnimationController(
       duration: const Duration(milliseconds: 2000),
       vsync: this,

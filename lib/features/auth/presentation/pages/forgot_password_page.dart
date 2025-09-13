@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/status_bar_utils.dart';
 import '../widgets/auth_card.dart';
 import 'reset_password_success_page.dart';
 
@@ -39,6 +40,9 @@ class _ForgotPasswordPageState extends ConsumerState<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Set light status bar for auth pages
+    StatusBarUtils.setLightStatusBar();
+
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
