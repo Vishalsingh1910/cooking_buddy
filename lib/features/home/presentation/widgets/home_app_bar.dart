@@ -40,7 +40,7 @@ class HomeAppBar extends StatelessWidget {
           ),
           const SizedBox(width: 12),
           Text(
-            'RecipeShare',
+            'Cooking Buddy',
             style: GoogleFonts.poppins(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -50,57 +50,33 @@ class HomeAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        IconButton(
-          onPressed: () {
-            // TODO: Implement search
-          },
-          icon: const Icon(
-            Icons.search,
-            color: AppColors.textPrimary,
-            size: 24,
-          ),
-        ),
-        Stack(
-          children: [
-            IconButton(
-              onPressed: () {
-                // TODO: Implement notifications
-              },
-              icon: const Icon(
-                Icons.notifications_outlined,
-                color: AppColors.textPrimary,
-                size: 24,
-              ),
-            ),
-            Positioned(
-              right: 8,
-              top: 8,
-              child: Container(
-                width: 8,
-                height: 8,
-                decoration: const BoxDecoration(
-                  color: AppColors.primary,
-                  shape: BoxShape.circle,
+        Padding(
+          padding: const EdgeInsets.only(right: 8, left: 8),
+          child: Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  // TODO: Implement notifications
+                },
+                icon: const Icon(
+                  Icons.notifications_outlined,
+                  color: AppColors.textPrimary,
+                  size: 24,
                 ),
               ),
-            ),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.only(right: 16, left: 8),
-          child: GestureDetector(
-            onTap: () {
-              // TODO: Implement profile
-            },
-            child: CircleAvatar(
-              radius: 18,
-              backgroundColor: AppColors.primary.withValues(alpha: 0.1),
-              child: const Icon(
-                Icons.person,
-                color: AppColors.primary,
-                size: 20,
+              Positioned(
+                right: 8,
+                top: 8,
+                child: Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: AppColors.primary,
+                    shape: BoxShape.circle,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ],
