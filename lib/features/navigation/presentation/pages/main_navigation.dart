@@ -5,6 +5,7 @@ import '../../../recipes/presentation/pages/recipe_list_page.dart';
 import '../../../chat/presentation/pages/chat_page.dart';
 import '../../../profile/presentation/pages/profile_page.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/utils/status_bar_utils.dart';
 
 final navigationIndexProvider = StateProvider<int>((ref) => 0);
 
@@ -13,6 +14,9 @@ class MainNavigation extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Set light status bar for main app
+    StatusBarUtils.setLightStatusBar();
+
     final currentIndex = ref.watch(navigationIndexProvider);
 
     final pages = [
